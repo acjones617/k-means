@@ -29,16 +29,21 @@ clusterCenters = c.init(normalMatrix, options['clusters'])
 
 # 3. assign points to a cluster
 # two element array, first with cluster num, second with sample
-clusterPoints = c.assignPoints(normalMatrix, clusterCenters)
+# clusterPoints, clusterNum = c.assignPoints(normalMatrix, clusterCenters)
 
 # 4. re-pick cluster center points
-clusterCenters = c.reselectCenters(clusterPoints, options['clusters'])
+# clusterCenters = c.reselectCenters(clusterPoints, options['clusters'])
 
 # 5. repeat steps 3 and 4
 for i in range(options['iterations']):
   clusterPoints = c.assignPoints(normalMatrix, clusterCenters)
   clusterCenters = c.reselectCenters(clusterPoints, options['clusters'])
 
-print clusterCenters
-print clusterPoints
+# final assign points
+clusterPoints = c.assignPoints(normalMatrix, clusterCenters)
+
+# 6. assign clusters to original data
+finalMatrix = n.reassign(matrix, clusterPoints)
+print j.encode(finalMatrix)
+
 
