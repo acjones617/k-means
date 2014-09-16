@@ -1,6 +1,11 @@
 var Engine = {};
 
 Engine.clusterDataSet = function(matrix, options, cb){
+  if (typeof options === 'function') {
+    cb = options;
+    options = undefined;
+  }
+
   cb = cb || function (results){
     console.log(results);
   };
@@ -26,8 +31,9 @@ Engine.clusterDataSet = function(matrix, options, cb){
     output += data;
   });
   python.stdout.on('close', function(){
-    // cb(JSON.parse(output));
-    cb(output);
+    console.log(cb)
+    cb(JSON.parse(output));
+    // cb(output);
   });
 };
 
