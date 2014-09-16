@@ -1,5 +1,3 @@
-# from sklearn import preprocessing
-# import numpy as np
 import random
 import util
 from numpy import mean
