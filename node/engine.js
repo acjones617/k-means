@@ -1,10 +1,12 @@
-// var rec = require('./variables').rec;
 var Engine = {};
 
-Engine.clusterDataSet = function(matrix, cb, options){
-  cb = cb || function(){};
+Engine.clusterDataSet = function(matrix, options, cb){
+  cb = cb || function (results){
+    console.log(results);
+  };
 
   // perform some tests:
+  options = options || {};
   options.iterations = options.iterations || 10
 
   matrix = JSON.stringify(matrix);
@@ -18,10 +20,7 @@ Engine.clusterDataSet = function(matrix, cb, options){
     output += data;
   });
   python.stdout.on('close', function(){
-    cb(output);
-    // _buildRecVariables(output);
-    // args = Array.prototype.slice.call(arguments,4);
-    // cb.apply(this,args);
+    cb(JSON.parse(output));
   });
 };
 
