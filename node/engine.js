@@ -5,9 +5,15 @@ Engine.clusterDataSet = function(matrix, options, cb){
     console.log(results);
   };
 
+  options             = options            || {};
+  options.clusters    = options.clusters   || 2;
+  options.iterations  = options.iterations || 10;
+  options.assigned    = options.assigned ? 1 : 0;
+  
   // perform some tests:
-  options = options || {};
-  options.iterations = options.iterations || 10
+  if (!Array.isArray(matrix) || !Array.isArray(matrix[0])) {
+    throw 'Need to input a 2-dimensional array for clustering';
+  }
 
   matrix = JSON.stringify(matrix);
   options = JSON.stringify(options);
@@ -20,7 +26,8 @@ Engine.clusterDataSet = function(matrix, options, cb){
     output += data;
   });
   python.stdout.on('close', function(){
-    cb(JSON.parse(output));
+    // cb(JSON.parse(output));
+    cb(output);
   });
 };
 

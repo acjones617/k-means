@@ -19,6 +19,8 @@ options = ast.literal_eval(args.options)
 # 3. assign points to a cluster
 # 4. re-pick cluster center points
 # 5. repeat
+# 6. assign clusters to original data
+# 7. send back to node
 
 # steps:
 # 1. normalize data
@@ -28,22 +30,23 @@ normalMatrix = n.normalize(matrix)
 clusterCenters = c.init(normalMatrix, options['clusters'])
 
 # 3. assign points to a cluster
-# two element array, first with cluster num, second with sample
-# clusterPoints, clusterNum = c.assignPoints(normalMatrix, clusterCenters)
 
 # 4. re-pick cluster center points
-# clusterCenters = c.reselectCenters(clusterPoints, options['clusters'])
 
 # 5. repeat steps 3 and 4
 for i in range(options['iterations']):
-  clusterPoints = c.assignPoints(normalMatrix, clusterCenters)
-  clusterCenters = c.reselectCenters(clusterPoints, options['clusters'])
+    clusterPoints = c.assignPoints(normalMatrix, clusterCenters)
+    clusterCenters = c.reselectCenters(clusterPoints, options['clusters'])
 
-# final assign points
+# final assignment of points
 clusterPoints = c.assignPoints(normalMatrix, clusterCenters)
 
 # 6. assign clusters to original data
 finalMatrix = n.reassign(matrix, clusterPoints)
-print j.encode(finalMatrix)
 
+# 7. send back to node - need to convert cluster centers to list first
+print j.encode({
+    'finalMatrix'   : finalMatrix,
+    'clusterCenters': clusterCenters
+})
 

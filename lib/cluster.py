@@ -42,6 +42,7 @@ def reselectCenters(clusterPoints, numClusters):
         assignedPoints.append(point[1])
 
     if len(assignedPoints) is not 0:
-      clusterCenters.append(mean(assignedPoints, axis=0))
+      # conver tolist() so that it can be encoded back to node correctly
+      clusterCenters.append(mean(assignedPoints, axis=0).tolist())
 
   return clusterCenters

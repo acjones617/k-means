@@ -5,12 +5,5 @@ eng.clusterDataSet([
   [0,1,1],
   [1,0,1],
   [1,1,0],
-  [22.1,22,1]], function (results) {
-  console.log('in callback')
-  // console.log(results);
-  // console.log(typeof results)
-  for (var i = 0; i < results.length; i++) {
-    console.log(results[i])
-  }
-}, {clusters: 2, iterations: 4});
+  [22.1,22,1]], {clusters: 2, iterations: 4});
 
