@@ -20,7 +20,7 @@ Using the node.js command line interface, the underlying python engine can be la
 
 ## <a name='setup' href='#'/> Setup Process
 
-To utilize the Product-Recommender NPM module, the first step would be to make sure one has successfully installed node.js, npm, and a python version of >= 2.7 or >= 3.2.  To install these items, I would recommend you check out http://nodejs.org/download/ and https://www.python.org/download/.
+To utilize the Product-Recommender NPM module, the first step would be to make sure one has successfully installed node.js, npm, and a python version of >= 2.7.  To install these items, I would recommend you check out http://nodejs.org/download/ and https://www.python.org/download/.
 
 In addition to these prerequisites, you will need to install a few python modules: numpy and jsonpickle. For install instructions on numpy, please go to http://www.scipy.org/install.html. For jsonpickle, please look at http://jsonpickle.github.io/#download-install. Some more python modules used in this project are argparse, ast, math, and random, though these should be included in the Python Standard Library so there is likely no need to download these.
 

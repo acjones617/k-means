@@ -1,6 +1,6 @@
 {
   "name": "k-means",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "node wrapper around python implementation of k-means using numpy",
   "main": "index.js",
   "scripts": {

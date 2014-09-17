@@ -2,22 +2,23 @@ import random
 import util
 from numpy import mean
 
-def init(matrix, numClusters):
+def init(matrix, num_clusters):
   # select num of clusters random matrix samples
-  clusterCenters = []
+  cluster_centers = []
   samples = range(len(matrix))
-  clusterIndices = []
-  while len(clusterIndices) < numClusters:
+  cluster_indices = []
+  while len(cluster_indices) < num_clusters:
     index = random.randint(0, len(samples) - 1)
-    clusterIndices.append(samples.pop(index))
+    cluster_indices.append(samples.pop(index))
 
-  for clusterIndex in clusterIndices:
-    clusterCenters.append(matrix[clusterIndex])
+  for clusterIndex in cluster_indices:
+    cluster_centers.append(matrix[clusterIndex])
 
-  return clusterCenters
+  return cluster_centers
 
-def assignPoints(matrix, clusters):
+def assign_points(matrix, clusters):
   clusterPoints = []
+  assignedClusters = []
 
   for sample in matrix:
     assignedCluster = 0
@@ -29,20 +30,24 @@ def assignPoints(matrix, clusters):
         assignedCluster = clusterInd
 
     clusterPoints.append([assignedCluster, sample])
+    assignedClusters.append(assignedCluster)
 
-  return clusterPoints
+  return (clusterPoints, assignedClusters)
 
-def reselectCenters(clusterPoints, numClusters):
-  clusterCenters = []
+def reselect_centers(clusterPoints, num_clusters):
+  cluster_centers = []
 
-  for cluster in range(numClusters):
-    assignedPoints = []
+  for cluster in range(num_clusters):
+    assigned_points = []
     for point in clusterPoints:
       if point[0] is cluster:
-        assignedPoints.append(point[1])
+        assigned_points.append(point[1])
 
-    if len(assignedPoints) is not 0:
-      # conver tolist() so that it can be encoded back to node correctly
-      clusterCenters.append(mean(assignedPoints, axis=0).tolist())
+    if len(assigned_points) is not 0:
+      # convert tolist() so that it can be encoded back to node correctly
+      cluster_centers.append(mean(assigned_points, axis=0).tolist())
 
-  return clusterCenters
+  return cluster_centers
+
+def converged(old_clusters, clusters):
+  return old_clusters == clusters

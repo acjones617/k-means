@@ -31,7 +31,6 @@ Engine.clusterDataSet = function(matrix, options, cb){
     output += data;
   });
   python.stdout.on('close', function(){
-    console.log(cb)
     cb(JSON.parse(output));
     // cb(output);
   });
